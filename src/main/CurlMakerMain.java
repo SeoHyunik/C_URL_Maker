@@ -1,7 +1,9 @@
+package main;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class testGui {
+public class CurlMakerMain {
+    
     public static void testGui() {
         JFrame frame = new JFrame("My First GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

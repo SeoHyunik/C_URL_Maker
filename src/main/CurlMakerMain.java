@@ -17,6 +17,11 @@ public class CurlMakerMain {
                                     "REACTIVATE", "DEACTIVATE", "ASSOCIATE", "DISASSOCIATE"};
     private static String endpoint[] = {"Local", "Stack"};
 
+    public static JComboBox jcbPlatfrom;
+    public static JComboBox jcbSvc;
+    public static JComboBox jcbCmd;
+    public static JComboBox jcbEndpoint;
+
     public static void testGui() {
         JFrame frame = new JFrame("C-Url Maker");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,34 +47,37 @@ public class CurlMakerMain {
         frame.getContentPane().add(jpBottom);
 
         //상단 패널에 위치시킬 JComboBox
-        JComboBox jcbPlatfrom = new JComboBox<String>(platform);
+        jcbPlatfrom = new JComboBox<String>(platform);
         jcbPlatfrom.setBounds(35, 40, 110, 40);
         jpTop.add(jcbPlatfrom);
-
-        JComboBox jcbSvc = new JComboBox<String>(svc);
+        
+        jcbSvc = new JComboBox<String>(svc);
         jcbSvc.setBounds(175, 40, 110, 40);
         jpTop.add(jcbSvc);
-
-        JComboBox jcbCmd = new JComboBox<String>(cmd);
+        
+        jcbCmd = new JComboBox<String>(cmd);
         jcbCmd.setBounds(315, 40, 110, 40);
         jpTop.add(jcbCmd);
-
-        JComboBox jcbEndpoint = new JComboBox<String>(endpoint);
+        
+        jcbEndpoint = new JComboBox<String>(endpoint);
         jcbEndpoint.setBounds(455, 40, 110, 40);
         jpTop.add(jcbEndpoint);
 
         //상단 패널에 위치시킬 JButton 
         JButton jbConfirm = new JButton("Confirm");
         jbConfirm.setBounds(470, 200, 80, 35);
+        jbConfirm.addActionListener(new MyActionListener());
         jpTop.add(jbConfirm);
         
         JButton jbSetting = new JButton("Setting");
         jbSetting.setBounds(470, 250, 80, 35);
+        jbSetting.addActionListener(new MyActionListener());
         jpTop.add(jbSetting);
         
         frame.setVisible(true);
-
-        jbConfirm.addActionListener(new MyActionListener());
         
     }
+
+
+
 }

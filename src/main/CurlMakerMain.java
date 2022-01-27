@@ -6,15 +6,16 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class CurlMakerMain {
     
     private static String platform[] = {"EPC", "G-Cloud"};
-    private static String svc[] = {"Token(Admin)", "Token(User)", "User", "Server", "Project", "Role", "Flavor", "Keypair", 
-                                    "Volume", "Snapshot", "Image", "Vpc", "Network", 
-                                    "Account", "Firewall", "IpAddress", "PortforwardingRule", "StaticRoute", 
-                                    "StaticNat", "Port"};
+    private static String svc[] = {"Token(Admin)", "Token(User)", "users", "servers", "projects", "roles", "flavors", "os-keypairs", 
+                                    "volumes", "snapshots", "images", "vpc", "Network", 
+                                    "Account", "Firewall", "IpAddress", "Portforwarding", "StaticRoute", 
+                                    "StaticNat", "ports"};
     private static String cmd[] = {"CREATE", "DELETE", "UPDATE", "LIST", "LIST(ID)", "LIST(DETAIL)", "ATTACH", "DETACH", 
                                     "REACTIVATE", "DEACTIVATE", "ASSOCIATE", "DISASSOCIATE", "START", "STOP", "REBOOT", "ENABLE", "DISABLE"};
     private static String endpoint[] = {"Local", "Stack"};
@@ -37,6 +38,8 @@ public class CurlMakerMain {
     public static JTextField jtfVal3;
 
     public static JButton jbCreate;
+    public static JLabel jlbCurl;
+    public static JTextArea jtaCurl;
     
     public static void testGui() {
         JFrame frame = new JFrame("C-Url Maker");
@@ -128,7 +131,17 @@ public class CurlMakerMain {
         jtfVal3.setVisible(false);
         jpMiddle.add(jtfVal3);
 
+        // 하단 패널에 위치시킬 JLabel, JTextArea
+        jlbCurl = new JLabel("C-URL");
+        jlbCurl.setBounds(35, 10, 80, 30);
+        jlbCurl.setVisible(true);
+        jpBottom.add(jlbCurl);
         
+        jtaCurl = new JTextArea();
+        jtaCurl.setLineWrap(true);
+        jtaCurl.setBounds(100, 10, 450, 60);
+        jtaCurl.setVisible(true);
+        jpBottom.add(jtaCurl);
         
         frame.setVisible(true);
         

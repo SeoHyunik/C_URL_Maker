@@ -6,6 +6,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -139,9 +140,10 @@ public class CurlMakerMain {
         
         jtaCurl = new JTextArea();
         jtaCurl.setLineWrap(true);
-        jtaCurl.setBounds(100, 10, 450, 60);
-        jtaCurl.setVisible(true);
-        jpBottom.add(jtaCurl);
+        JScrollPane jsp = new JScrollPane(jtaCurl);
+        jsp.setBounds(100, 10, 450, 60);
+        jsp.setVisible(true);
+        jpBottom.add(jsp);
         
         frame.setVisible(true);
         

@@ -8,6 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+
+
 public class MyActionListener implements ActionListener {
 
     @Override
@@ -32,6 +34,7 @@ public class MyActionListener implements ActionListener {
             cmm.jtfVal1.setText("");
             cmm.jtfVal2.setText("");
             cmm.jtfVal3.setText("");
+            cmm.jtaCurl.setText("");
 
             // 값을 받아 분류하여 TextArea 생성해주기
             classifyValues(svc, cmd);
@@ -49,10 +52,25 @@ public class MyActionListener implements ActionListener {
         
         CurlMakerMain cmm = new CurlMakerMain();
         
-        if ("Token(Admin)".equals(svc)) { } // No Input Args
+        if ("Token(Admin)".equals(svc)) { 
+            if ("CREATE".equals(cmd)) {
+                String authToken = authToken();
+                cmm.jtaCurl.setText("curl -ki X POST -H 'Content-Type:application/json' -d '"+authToken+"' http://localhost:8080/openstack4kt/keystone/v3/auth/tokens");
+            } else {
+                //오류팝업
+            }
+        } // No Input Args
         
         if ("Token(User)".equals(svc)) { // User Email, User Password
-            
+            if ("CREATE".equals(cmd)) {
+                cmm.jlbVal1.setText("EMAIL");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("PW");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else {
+                //오류팝업
+            }
         }
         
         if ("users".equals(svc)) { // Create, List, List(UserId), Delete 
@@ -164,7 +182,7 @@ public class MyActionListener implements ActionListener {
         if ("volumes".equals(svc)) { // Create, List, List(VolumeId), Delete,
             
         }
-
+        
         if ("vpc".equals(svc)) { // List, Delete
             
         }
@@ -203,34 +221,44 @@ public class MyActionListener implements ActionListener {
         
     }//classifyValues
     
+
     private void checkLabel(String jlb1, String jlb2, String jlb3, String svc, String cmd, String endpoint) {
         CurlMakerMain cmm = new CurlMakerMain();
-        // 1. JLabel에 제목에 따라 값 넣어주기 (TOKEN, JSON, ID1, ID2)
-        String token = "";
-        String json = "";
-        String id1 = "";
-        String id2 = "";
-        if (jlb1.equals("TOKEN")) {
-            token = cmm.jtfVal1.getText();
-        }
-        
-        if (jlb2.equals("JSON")) {
-            json = cmm.jtfVal2.getText();
-        } else if (jlb2.equals("ID1")) {
-            id1 = cmm.jtfVal2.getText();
-        }
-        
-        if (jlb3.equals("ID1")) {
-            id1 = cmm.jtfVal3.getText();
-        } else if (jlb3.equals("ID2")) {
-            id2 = cmm.jtfVal3.getText();
-        }
-        
-        // 2. 값들을 curlMaker로 전달
-        String curl = curlMaker(token, json, id1, id2, svc, cmd, endpoint);
-        cmm.jtaCurl.setText(curl);
+        // 0. User Token 생성
+        String email = "";
+        String pw = "";
+        if (jlb1.equals("EMAIL") && jlb2.equals("PW")) {
+            email = cmm.jtfVal1.getText();
+            pw = cmm.jtfVal2.getText();
+            String token = userToken(email, pw);
+            cmm.jtaCurl.setText("curl -ki X POST -H 'Content-Type:application/json' -d '"+token+"' http://localhost:8080/openstack4kt/keystone/v3/auth/tokens");
+        } else {
+            // 1. JLabel에 제목에 따라 값 넣어주기 (TOKEN, JSON, ID1, ID2)
+            String token = "";
+            String json = "";
+            String id1 = "";
+            String id2 = "";
+            if (jlb1.equals("TOKEN")) {
+                token = cmm.jtfVal1.getText();
+            }
+            
+            if (jlb2.equals("JSON")) {
+                json = cmm.jtfVal2.getText();
+            } else if (jlb2.equals("ID1")) {
+                id1 = cmm.jtfVal2.getText();
+            }
+            
+            if (jlb3.equals("ID1")) {
+                id1 = cmm.jtfVal3.getText();
+            } else if (jlb3.equals("ID2")) {
+                id2 = cmm.jtfVal3.getText();
+            }
+            
+            // 2. 값들을 curlMaker로 전달
+            String curl = curlMaker(token, json, id1, id2, svc, cmd, endpoint);
+            cmm.jtaCurl.setText(curl);
+        }//end else
     }//checkLabel
-    
     
     private String curlMaker(String token, String json, String id1, String id2, String svc, String cmd, String endpoint) {
         CurlMakerMain cmm = new CurlMakerMain();
@@ -378,5 +406,19 @@ public class MyActionListener implements ActionListener {
 
     }//curlMaker
     
+    private String authToken() {
+        StringBuilder sbToken = new StringBuilder();
+        sbToken.append("{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"domain\":{\"id\":\"default\"},\"name\":\"admin\",\"password\":\"P@ssw0rd\"}}},");
+        sbToken.append("\"scope\":{\"project\":{\"domain\":{\"id\":\"default\"},\"name\":\"admin\"}}}}");
+        return sbToken.toString();
+    }
+
     
+    
+    private String userToken(String email, String pw) {
+        StringBuilder sbToken = new StringBuilder();
+        sbToken.append("{\"auth\":{\"identity\":{\"methods\":[\"password\"],\"password\":{\"user\":{\"domain\":{\"id\":\"default\"},\"name\":\""+email+"\",\"password\":\""+pw+"\"}}},");
+        sbToken.append("\"scope\":{\"project\":{\"domain\":{\"id\":\"default\"},\"name\":\""+email+"\"}}}}");
+        return sbToken.toString();
+    }
 }

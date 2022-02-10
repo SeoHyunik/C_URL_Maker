@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 public class CurlMakerMain {
     
-    private static String platform[] = {"EPC", "G-Cloud"};
+    private static String platform[] = {"Service1", "Service2"};
     private static String svc[] = {"Token(Admin)", "Token(User)", "users", "servers", "projects", "roles", "flavors", "os-keypairs", 
                                     "volumes", "snapshots", "images", "vpc", "Network", 
                                     "Account", "Firewall", "IpAddress", "Portforwarding", "StaticRoute", 
@@ -41,6 +41,7 @@ public class CurlMakerMain {
     public static JButton jbCreate;
     public static JLabel jlbCurl;
     public static JTextArea jtaCurl;
+    public static JScrollPane jsp;
     
     public static void testGui() {
         JFrame frame = new JFrame("C-Url Maker");
@@ -91,7 +92,7 @@ public class CurlMakerMain {
         jbConfirm.addActionListener(new MyActionListener());
         jpTop.add(jbConfirm);
         
-        JButton jbSetting = new JButton("Setting");
+        JButton jbSetting = new JButton("Json");
         jbSetting.setBounds(470, 250, 80, 35);
         jbSetting.addActionListener(new MyActionListener());
         jpTop.add(jbSetting);
@@ -140,7 +141,8 @@ public class CurlMakerMain {
         
         jtaCurl = new JTextArea();
         jtaCurl.setLineWrap(true);
-        JScrollPane jsp = new JScrollPane(jtaCurl);
+        jtaCurl.setEditable(false);
+        jsp = new JScrollPane(jtaCurl);
         jsp.setBounds(100, 10, 450, 60);
         jsp.setVisible(true);
         jpBottom.add(jsp);

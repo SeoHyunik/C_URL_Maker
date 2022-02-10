@@ -34,7 +34,7 @@ public class MyActionListener implements ActionListener {
             cmm.jtfVal1.setText("");
             cmm.jtfVal2.setText("");
             cmm.jtfVal3.setText("");
-            cmm.jtaCurl.setText("");
+            cmm.jtaCurl.setText(null);
 
             // 값을 받아 분류하여 TextArea 생성해주기
             classifyValues(svc, cmd);

@@ -34,6 +34,9 @@ public class CurlMakerMain {
     public static JLabel jlbVal2;
     public static JLabel jlbVal3;
 
+    public static JLabel errJlb1;
+    public static JLabel errJlb2;
+
     public static JTextField jtfVal1;
     public static JTextField jtfVal2;
     public static JTextField jtfVal3;
@@ -116,6 +119,15 @@ public class CurlMakerMain {
         jlbVal3 = new JLabel();
         jlbVal3.setBounds(35, 120, 80, 30);
         jpMiddle.add(jlbVal3);
+
+        // 중단 패널에 위치시킬 오류 JLabel
+        errJlb1 = new JLabel();
+        errJlb1.setBounds(35, 20, 80, 30);
+        jpMiddle.add(errJlb1);
+        
+        errJlb2 = new JLabel();
+        errJlb2.setBounds(35, 70, 80, 30);
+        jpMiddle.add(errJlb2);
 
         // 중단 패널에 위치시킬 JTextField
         jtfVal1 = new JTextField();

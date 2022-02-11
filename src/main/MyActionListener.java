@@ -51,6 +51,7 @@ public class MyActionListener implements ActionListener {
     private void classifyValues(String svc, String cmd) {
         
         CurlMakerMain cmm = new CurlMakerMain();
+        JComboBox jcbCmd;
         
         if ("Token(Admin)".equals(svc)) { 
             if ("CREATE".equals(cmd)) {
@@ -58,6 +59,7 @@ public class MyActionListener implements ActionListener {
                 cmm.jtaCurl.setText("curl -ki X POST -H 'Content-Type:application/json' -d '"+authToken+"' http://localhost:8080/openstack4kt/keystone/v3/auth/tokens");
             } else {
                 //오류팝업
+                cmm.errJlb1.setText("");
             }
         } // No Input Args
         
@@ -159,32 +161,156 @@ public class MyActionListener implements ActionListener {
             }//end else
         }
         
-        if ("projects".equals(svc)) { // Create, List, List(ProjectId), Delete
-            
+        if ("projects".equals(svc)) { // List, List(ProjectId), Delete
+            if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST(ID)".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("DELETE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
-        if ("roles".equals(svc)) { // Create, List, List(RoleId), Delete
-            
+        if ("roles".equals(svc)) { // List, List(RoleId), Delete
+            if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST(ID)".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("DELETE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
-        if ("flavors".equals(svc)) { // Create, List, List(FlavorId), Delete, Update
-            
+        if ("flavors".equals(svc)) { // List
+            if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
-        if ("os-keypairs".equals(svc)) { // Create, List, List(KeyName), Delete
-            
+        if ("os-keypairs".equals(svc)) { // Create, List, List(KeyName)
+            if ("CREATE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("JSON");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST(ID)".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
-        if ("images".equals(svc)) { // Create, List, List(ImageId), Delete, Update, Deactivate, Reactivate
-            
+        if ("images".equals(svc)) { // List, List(ImageId), Delete, Update, (Deactivate, Reactivate)
+            if ("UPDATE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("JSON");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jlbVal3.setText("ID1");
+                cmm.jtfVal3.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST(ID)".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("DELETE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
-        if ("volumes".equals(svc)) { // Create, List, List(VolumeId), Delete,
-            
+        if ("volumes".equals(svc)) { // Create, List, List(VolumeId), Delete  !!!!!!!! volumes가 뒤에 들어가서 수정 필요
+            if ("CREATE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("JSON");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jlbVal3.setText("ID1");
+                cmm.jtfVal3.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("LIST(ID)".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("DELETE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
-        if ("vpc".equals(svc)) { // List, Delete
-            
+        if ("vpc".equals(svc)) { // List, Delete  !!!!! delete에서 입력값이 다름
+            if ("LIST".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else if ("DELETE".equals(cmd)) {
+                cmm.jlbVal1.setText("TOKEN");
+                cmm.jtfVal1.setVisible(true);
+                cmm.jlbVal2.setText("ID1");
+                cmm.jtfVal2.setVisible(true);
+                cmm.jbCreate.setVisible(true);
+            } else { // 오류팝업
+                
+            }//end else
         }
         
         if ("Network".equals(svc)) { // Create, List, Delete
